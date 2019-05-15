@@ -1,4 +1,5 @@
-import urllib.request
+# import urllib.request
+import requests
 import sys
 import os
 import json
@@ -12,17 +13,17 @@ if not os.path.exists("json_files"):
 if not os.path.exists("parsed_files"):
 	os.mkdir("parsed_files")
 
-response = urllib.request.urlopen('https://api.themoviedb.org/3/movie/latest?api_key=' + api_key)
-json_response = json.load(response)
+response = requests.get('https://api.themoviedb.org/3/movie/latest?api_key=' + api_key)
+json_response = response.json()
 movie_count = int(json_response['id'])
 
 movie_start = movie_count-5
 
 for i in range(movie_start, movie_count):
 	print("downloading: " + str(i))
-	response = urllib.request.urlopen('https://api.themoviedb.org/3/movie/' + str(i) + '?api_key=' + api_key)
+	response = requests.get('https://api.themoviedb.org/3/movie/' + str(i) + '?api_key=' + api_key)
 	#print(response.read())
-	json_response = json.load(response)
+	json_response = response.json()
 	f = open("json_files/tmdb" + str(i) + ".json", "w")
 	f.write(str(json_response))
 	f.close()
