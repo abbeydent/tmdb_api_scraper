@@ -9,8 +9,6 @@ api_key = sys.argv[1]
 if not os.path.exists("json_files"):
 	os.mkdir("json_files")
 
-if not os.path.exists("parsed_files"):
-	os.mkdir("parsed_files")
 
 response = requests.get('https://api.themoviedb.org/3/movie/latest?api_key=' + api_key)
 json_response = response.json()
