@@ -1,4 +1,3 @@
-# import urllib.request
 import requests
 import sys
 import os
@@ -25,7 +24,7 @@ for i in range(movie_start, movie_count):
 	#print(response.read())
 	json_response = response.json()
 	f = open("json_files/tmdb" + str(i) + ".json", "w")
-	f.write(str(json_response))
+	f.write(json.dumps(json_response, indent=4))
 	f.close()
 	time.sleep(15)
 
